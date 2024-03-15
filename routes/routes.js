@@ -1,13 +1,13 @@
 const express = require('express')
-const loginService = require('./login')
+const loginService = require('backend/login/login-service')
+const loginService = require('backend/login/user-validation-service')
+const loginService = require('backend/email-service')
 const pdf = require('../gerador-pdf')
 const router = express.Router()
 
 const multer = require('multer');
 const storage = multer.memoryStorage();
 const upload = multer({ storage: storage });
-const path = require('path');
-const fs = require('fs').promises;
 
 const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
@@ -15,17 +15,6 @@ const prisma = new PrismaClient();
 const ALUNO = 0
 const ORIENTADOR = 1
 const ADMINISTRADOR = 2
-
-router.use((req, res, next) => {
-    const horarioAtual = new Date().toUTCString();
-    console.log(`${horarioAtual} - Carregando ${req.path}`)
-    next()
-})
-
-router.post('/login', loginService.login);
-
-router.get('/login', (req, res, next) => res.redirect('/'))
-router.get('/logout', loginService.logout);
 
 //
 //
