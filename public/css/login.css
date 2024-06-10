@@ -1,8 +1,4 @@
-@import url("./reset.css");
-
-*, body, input {
-    font-family: "Trebuchet MS";
-}
+@import url("./main.css");
 
 body {
     background-color: #d0bebe;

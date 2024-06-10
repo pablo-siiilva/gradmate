@@ -5,7 +5,7 @@ const login = require('./routes/login');
 
 router.get('/', login.verify, (req, res) => {
     log.info("Carregando index...");
-    res.send("Hello World");
+    res.render("index", { cookies: res.cookie });
 });
 
 router.use('/login', login.router);

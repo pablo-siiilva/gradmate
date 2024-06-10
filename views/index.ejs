@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Index - GradMate</title>
+    <link rel="icon" type="image/x-icon" href="/img/favicon.png">
+    <link rel="stylesheet" href="/css/index.css">
+</head>
+
+<body>
+<header class="header">
+    <img src="img/logo.png" alt="Logo do sistema" id="logo"/>
+    <p id="header_leave_button"><a href="#">Sair</a></p>
+</header>
+<aside class="sidebar">
+    <ul>
+        <li>Didático</li>
+        <li><a href="/meusprojetos">Meus projetos</a></li>
+    </ul>
+    <% if (typeof cookies !== 'undefined' &&
+            typeof cookies !== 'undefined' &&
+            cookies.permissions.isAdmin) { %>
+        <ul>
+            <li>Gerenciar</li>
+            <li><a href="/projetos">Projetos</a></li>
+            <li><a href="/alunos">Alunos</a></li>
+            <li><a href="/professores">Professores</a></li>
+            <li><a href="/cursos">Cursos</a></li>
+            <li><a href="/usuarios">Usuários</a></li>
+        </ul>
+    <% } %>
+</aside>
+<main id="content">
+
+</main>
+</body>
+
+</html>

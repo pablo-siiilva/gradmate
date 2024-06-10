@@ -8,7 +8,7 @@ const userRepository = require('./repo/userRepository.js')
 const secretKey = process.env.SECRET_KEY;
 
 router.get('/', (req, res) => {
-    res.render("login");
+    res.render("login", { cookies: res.cookie });
 });
 
 router.post('/', async (req, res) => {
@@ -16,7 +16,7 @@ router.post('/', async (req, res) => {
     const isLoginValid = await validateLoginInformation(body);
     if (!isLoginValid) {
         log.info("Login inválido -> " + body.user + ":" + body.pass);
-        res.render("login", {loginValid: false});
+        res.render("login", {loginValid: false, cookies: res.cookie });
         return;
     }
 
@@ -32,16 +32,17 @@ async function validateLoginInformation(body) {
     }
 
     body.permissions = {
-        isAdmin: body.isAdmin,
-        canUploadFiles: body.canUploadFiles,
-        canDownloadFiles: body.canDownloadFiles
+        isAdmin: user.permissaoAdmin,
+        canUploadFiles: user.permissaoUploadArquivos,
+        canDownloadFiles: user.permissaoDownloadArquivos
     }
-    
+
     return true;
 }
 
 function saveToken(body, res) {
     res.cookie.token = jwt.sign({ userId: body.user, userType: body.type }, secretKey, { expiresIn: '2h' });
+    res.cookie.permissions = body.permissions;
 }
 
 module.exports = {
