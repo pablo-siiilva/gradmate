@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Index - GradMate</title>
+    <link rel="icon" type="image/x-icon" href="/img/favicon.png">
+    <link rel="stylesheet" href="/css/alunos.css">
+</head>
+
+<body>
+<header class="header">
+    <img src="img/logo.png" alt="Logo do sistema" id="logo"/>
+    <p id="header_leave_button"><a href="#">Sair</a></p>
+</header>
+<aside class="sidebar">
+    <ul>
+        <li>Didático</li>
+        <li><a href="/meusprojetos">Meus projetos</a></li>
+    </ul>
+    <% if (typeof cookies !== 'undefined' &&
+            typeof cookies !== 'undefined' &&
+            cookies.permissions.isAdmin) { %>
+        <ul>
+            <li>Gerenciar</li>
+            <li><a href="/projetos">Projetos</a></li>
+            <li><a href="/alunos">Alunos</a></li>
+            <li><a href="/professores">Professores</a></li>
+            <li><a href="/cursos">Cursos</a></li>
+            <li><a href="/usuarios">Usuários</a></li>
+        </ul>
+    <% } %>
+</aside>
+<main id="content">
+    <div id="top-part">
+        <button id="top-part-addbtn">Adicionar ➕</button>
+        <input type="text" id="top-part-search"/>
+        <button id="top-part-searchbtn">🔍</button>
+    </div>
+    <div class="list" data-alunos="<%= alunos %>">
+        <% if (alunos && alunos.length > 0) { %>
+            <% alunos.forEach(aluno => { %>
+                <div class="list-item"><%= aluno.name %></div>
+            <% }) %>
+        <% } else { %>
+            <div class="list-item">Nenhum item encontrado</div>
+        <% } %>
+    </div>
+    <div class="footer">
+        <button class="page-button" onclick="navigate(-1)">⬅️</button>
+        <span>Página <span id="currentPage"></span> de <span id="totalPages"></span></span>
+        <button class="page-button" onclick="navigate(1)">➡️</button>
+    </div>
+</main>
+<script src="./alunos.js"></script>
+</body>
+</html>
