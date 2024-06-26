@@ -9,6 +9,7 @@ module.exports = {
             const [rows] = await con.execute(
                 "SELECT * FROM aluno ORDER BY id DESC"
             );
+            log.info(rows)
             await con.end();
             return rows;
         } catch (err) {
